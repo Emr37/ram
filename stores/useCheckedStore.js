@@ -4,13 +4,16 @@ const useCheckedStore = create((set) => ({
   checkedChars: [],
 
   // Seçilen karakteri ekleyen veya kaldıran fonksiyon
-  setCheckedChars: (item) =>
+  setCheckedChars: (item) => {
+    console.log("check store", item.name, " ", item.checked);
     set((state) => {
-      const newCheckedChars = state.checkedChars.includes(item.id)
-        ? state.checkedChars.filter((char) => char.id !== item.id) // Karakterin id varsa, sil
-        : [...state.checkedChars, item]; // Karakter yoksa, ekle
-      return { checkedChars: newCheckedChars };
-    }),
+      const newChars = item.checked
+        ? [...state.checkedChars, item] // Karakter yoksa, ekle
+        : state.checkedChars.filter((char) => char.id !== item.id); // Karakterin id varsa, sil
+
+      return { checkedChars: newChars };
+    });
+  },
 }));
 
 export default useCheckedStore;

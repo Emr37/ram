@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, Button, FlatList, ActivityIndicator, TouchableOpacity, } from 'react-native';
 import { useRouter } from 'expo-router';
 import {  fetchAllCharacters, fetchCharacter, fetchCharacters } from "../../services"
-import useCharacterStore from '../../stores/useCharactersStore';
 import CharactersCard from '../../components/CharactersCard';
 import { useQuery } from '@tanstack/react-query';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -28,14 +28,15 @@ const HomeScreen = () => {
   });
 
   return (
-    <View className="flex-1 items-center pt-safe">
-      <View className='flex-row w-full justify-around items-center bg-gray-300'>
+    <SafeAreaView className='w-full h-full'>
+    <View className="flex-1 items-center ">
+      <View className='flex-row w-full justify-around items-center '>
         <TouchableOpacity onPress={prevPage} className='h-fit'>
-          <FontAwesome name='arrow-circle-o-left' color={"black"} size={36}/>
+          <FontAwesome name='arrow-circle-o-left' color={"#9ca3af"} size={36}/>
         </TouchableOpacity>
         <Text className="text-2xl m-4">Home Screen</Text>
         <TouchableOpacity onPress={nextPage} className='h-fit'>
-          <FontAwesome name='arrow-circle-o-right' color={"black"} size={36}/>
+          <FontAwesome name='arrow-circle-o-right' color={"#9ca3af"} size={36}/>
         </TouchableOpacity>
       </View>
             
@@ -55,6 +56,7 @@ const HomeScreen = () => {
       )}
 
     </View>
+    </SafeAreaView>
   );
 };
 

@@ -10,7 +10,6 @@ const fetchCharacter = async (id:number) => {
   }
 
   const stringifiedObj = JSON.stringify(response.data, null, 2);
-  console.log("base fetch", stringifiedObj);
 
   return response.data;
 };
@@ -23,7 +22,6 @@ const fetchCharacters = async (ids:number[]) => {
   }
 
   const stringifiedObj = JSON.stringify(response.data, null, 2);
-  console.log("base fetch", stringifiedObj);
 
   return response.data;
 };
@@ -36,7 +34,6 @@ const fetchAllCharacters = async (page: number) => {
   }
 
   const stringifiedObj = JSON.stringify(response.data.results, null, 2);
-  console.log("Paginated AllCharacters", stringifiedObj);
 
   return response.data.results;
 };
@@ -49,7 +46,6 @@ const filteredFetchByName = async (word: string) => {
   }
 
   const stringifiedObj = JSON.stringify(response.data.results, null, 2);
-  console.log("Filtered Characters", stringifiedObj);
 
   return response.data.results;
 };

@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, TextInput } from 'react-native';
-import {  fetchAllCharacters, fetchCharacter, fetchCharacters, filteredFetchByName } from "../../services"
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, ActivityIndicator, TextInput } from 'react-native';
+import {  filteredFetchByName } from "../../services"
 import CharactersCard from '../../components/CharactersCard';
 import { useQuery } from '@tanstack/react-query';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import useCheckedStore from '@/stores/useCheckedStore';
+import CheckedChars from '@/components/CheckedChars';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+
 
 const SearchScreen = () => {
   const {checkedChars} = useCheckedStore();
 
-  //const [ids, setIds] = useState<number[]>([1, 2]); // Başlangıç ID'leri
-  //const [id, setId] = useState<number>(5);
   const [input, setInput] = useState<string>("");
 
   const {data: filteredChars, isPending, error, isError} = useQuery({
@@ -18,31 +19,33 @@ const SearchScreen = () => {
     queryFn: () => filteredFetchByName(input)
   });
 
-  // const {data: chars, isPending:charsIsPending, error:charsError, isError: charsIsError} = useQuery({
-  //   queryKey:["character", ids],
-  //   queryFn: () => fetchCharacters(ids)
-  // });
-console.log('checkedChars', JSON.stringify(checkedChars, null,2));
  
   return (
-    <View className="flex-1 items-center pt-safe">
-      <View className='flex-row w-full justify-around items-center bg-gray-300'>
-
+    <SafeAreaView className='w-full h-full '>
+    <View className="flex-1 items-center ">
+      <View className='flex-row w-11/12 justify-center items-center p-2 rounded-2xl border-solid border-gray-400 border-2 ' >
+        {checkedChars.length > 0 &&        
         <FlatList
-        className='bg-pink-400'
+        className='h-full rounded-xl  max-w-fit'
         data={checkedChars}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item?.id}
-        renderItem={({item}) => (<Text>{item.name}</Text>
-        )}
+        renderItem={({item}) => (<CheckedChars item={item} filtered={filteredChars}/>)
+        }
         />
-        <TextInput 
-        placeholder='Search Screen'
-        value={input}
-        onChangeText={(e) => setInput(e)}
-        />
-        
+      }
+        <View className='max-w-full min-w-fit w-1/4'>
+          <TextInput
+          className='w-max text-base text-wrap rounded-xl text-center' 
+          
+          placeholder='Search'
+          multiline={true}
+          value={input}
+          onChangeText={(e) => setInput(e)}
+          />
+        </View>
       </View>
-
             
       {isPending ? (
         <ActivityIndicator size="large" />
@@ -53,12 +56,21 @@ console.log('checkedChars', JSON.stringify(checkedChars, null,2));
           className='mt-2 w-11/12 rounded-t-2xl border-solid border-gray-400 border-2 border-b-0'
           data={filteredChars}          
           keyExtractor={(item) => item?.id}
-          renderItem={({ item }) => (
-            <CharactersCard item={item} search={true} word={input.toLocaleLowerCase()}/>
-          )}
+          renderItem={({ item }) => {
+             checkedChars.map((e:any) => {   // Kelime ile arama yaptıktan sonrada yeni yapılmış olan sorgunun manipüle edilmesi
+               if(e.id == item.id){
+                 item.checked = true;
+               }
+             }
+            )
+            return(<CharactersCard item={item} search={true} word={input.toLocaleLowerCase()} />)
+
+          }
+          }
         />
       )}
     </View>
+    </SafeAreaView>
   );
 };
 export default SearchScreen;
