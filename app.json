@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ram",
+    "name": "R&M",
     "slug": "ram",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,13 +9,20 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
     },
     "android": {
+      "userInterfaceStyle": "automatic",
+      "versionCode": 1,
+      "runtimeVersion": "1.0.0",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#000000"
-      }
+      },
+      "package": "com.emraksoy.ram"
     },
     "web": {
       "bundler": "metro",
@@ -36,6 +43,18 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "5672b555-ad8c-4fa7-8e8c-dec4f9458c00"
+      }
+    },
+    "owner": "emraksoy",
+    "updates": {
+      "url": "https://u.expo.dev/5672b555-ad8c-4fa7-8e8c-dec4f9458c00"
     }
   }
 }
