@@ -1,9 +1,11 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
+import useThemeStore from '@/stores/useThemeStore';
 
 export default function TabLayout() {
+  const {isDarkMode} = useThemeStore()
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: 'black', tabBarInactiveTintColor: 'gray', headerShown: false }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: 'black', tabBarInactiveTintColor: 'gray', headerShown: false}}>
       <Tabs.Screen
         name='index'
         options={{

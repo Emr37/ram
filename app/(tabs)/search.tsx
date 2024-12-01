@@ -6,12 +6,12 @@ import { useQuery } from '@tanstack/react-query';
 import useCheckedStore from '@/stores/useCheckedStore';
 import CheckedChars from '@/components/CheckedChars';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import useThemeStore from '@/stores/useThemeStore';
 
 
 const SearchScreen = () => {
   const {checkedChars} = useCheckedStore();
-
+  const {isDarkMode} = useThemeStore()
   const [input, setInput] = useState<string>("");
 
   const {data: filteredChars, isPending, error, isError} = useQuery({
@@ -21,7 +21,7 @@ const SearchScreen = () => {
 
  
   return (
-    <SafeAreaView className='w-full h-full '>
+    <SafeAreaView className={`w-full h-full ${isDarkMode ? "bg-black": undefined}`}>
     <View className="flex-1 items-center ">
       <View className='flex-row w-11/12 justify-center items-center p-2 rounded-2xl border-solid border-gray-400 border-2 ' >
         {checkedChars.length > 0 &&        
@@ -37,8 +37,8 @@ const SearchScreen = () => {
       }
         <View className='max-w-full min-w-fit w-1/4'>
           <TextInput
-          className='w-max text-base text-wrap rounded-xl text-center' 
-          
+          className={`${isDarkMode ? "text-slate-50" : undefined} w-max text-base text-wrap rounded-xl text-center`}
+          placeholderTextColor={isDarkMode ? 'white': undefined}
           placeholder='Search'
           multiline={true}
           value={input}
@@ -63,7 +63,7 @@ const SearchScreen = () => {
                }
              }
             )
-            return(<CharactersCard item={item} search={true} word={input.toLocaleLowerCase()} />)
+            return(<CharactersCard item={item} search={true} word={input.toLocaleLowerCase()} bookmarked={false}/>)
 
           }
           }

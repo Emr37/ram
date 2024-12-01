@@ -1,14 +1,28 @@
-import { View, Text, Button } from 'react-native';
+import { View, Text, Switch } from 'react-native';
 import { useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import useThemeStore from '@/stores/useThemeStore';
+import { useEffect } from 'react';
 
 const SettingsScreen = () => {
-  const router = useRouter();
+  const { isDarkMode, toggleTheme, loadTheme } = useThemeStore(); // Zustand'dan tema durumu
+
+  useEffect(() => {
+    loadTheme()
+  },[loadTheme])
 
   return (
-    <View className="flex-1 justify-center items-center">
-      <Text className="text-2xl mb-4">Settings Screen</Text>
-      
+  <SafeAreaView className={`w-full h-full ${isDarkMode ? "bg-black": undefined}`}>
+    <View className="items-center justify-center h-full">
+        <Text className={`text-xl ${isDarkMode && "text-slate-50"}`}>
+          {isDarkMode ? 'Dark Mode' : 'Light Mode'}
+        </Text>
+        <Switch
+          value={isDarkMode}
+          onValueChange={toggleTheme} // Tema değiştirme fonksiyonu
+        />
     </View>
+  </SafeAreaView>
   );
 };
 

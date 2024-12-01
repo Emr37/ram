@@ -4,9 +4,13 @@ import { Image } from "expo-image";
 import { useEffect, useState } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import useCheckedStore from "../stores/useCheckedStore";
+import useBookmarkStore from "@/stores/useBookmarkStore";
+import useThemeStore from "@/stores/useThemeStore";
 
-const CharactersCard = ({ item, search, word }) => {
+const CharactersCard = ({ item, search, word, bookmarked }) => {
   const { setCheckedChars, checkedChars } = useCheckedStore();
+  const { addBookmark, removeBookmark } = useBookmarkStore();
+  const { isDarkMode } = useThemeStore();
 
   const checkChar = (i) => {
     i.checked = !i.checked; // Yerel seçilme durumuna bağlı olarak item (veya i) ın checked özelliğine true/false ataması yapıyor.
@@ -47,21 +51,27 @@ const CharactersCard = ({ item, search, word }) => {
         <View className="p-1">
           <Checkbox
             style={{ borderRadius: 4 }}
-            className="m-2 h-2 w-2"
+            className="ml-2 h-2 w-2"
             value={item.checked}
             onValueChange={() => checkChar(item)}
             color={item.checked ? "#0A5EB0" : undefined}
           />
         </View>
       )}
-      <Image style={{ height: 50, width: 50, marginRight: 8, borderRadius: 8 }} contentFit="contain" source={{ uri: item?.image }} />
+      <Image style={{ height: 50, width: 50, marginHorizontal: 8, borderRadius: 8 }} contentFit="contain" source={{ uri: item?.image }} />
       <View className="flex-1">
-        <Text className="text-xl">{renderHighlightedText(item?.name, word)}</Text>
-        <Text className="text-lg">{item?.episode.length === 1 ? "1 Episode" : `${item?.episode.length} Episodes`}</Text>
+        <Text className={`text-xl ${isDarkMode ? "text-slate-50" : undefined}`}>{renderHighlightedText(item?.name, word)}</Text>
+        <Text className={`text-lg ${isDarkMode ? "text-slate-50" : undefined}`}>
+          {item?.episode.length === 1 ? "1 Episode" : `${item?.episode.length} Episodes`}
+        </Text>
       </View>
       {!search && (
-        <TouchableOpacity style={{ position: "absolute", borderRadius: 4 }} className="-top-0.5 right-2 ">
-          <FontAwesome name="bookmark-o" color={true ? "#9ca3af" : "#0A5EB0"} size={24} />
+        <TouchableOpacity
+          onPress={() => (bookmarked ? removeBookmark(item) : addBookmark(item))}
+          style={{ position: "absolute", borderRadius: 4 }}
+          className="-top-0.5 right-2 "
+        >
+          <FontAwesome name={bookmarked ? "bookmark" : "bookmark-o"} color={true ? "#9ca3af" : "#0A5EB0"} size={24} />
         </TouchableOpacity>
       )}
     </View>
