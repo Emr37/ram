@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'ram'
+rootProject.name = 'R&M'
 
 dependencyResolutionManagement {
   versionCatalogs {

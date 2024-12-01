@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import Checkbox from "expo-checkbox";
 import { Image } from "expo-image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import useCheckedStore from "../stores/useCheckedStore";
 import useBookmarkStore from "@/stores/useBookmarkStore";
@@ -36,7 +36,7 @@ const CharactersCard = ({ item, search, word, bookmarked }) => {
       // Eğer parça eşleşen kelimelerse, kalın yap
       if (part.toLowerCase() === keyword.toLowerCase()) {
         return (
-          <Text key={index} style={{ fontWeight: "800" }}>
+          <Text key={index} style={{ fontWeight: "900" }}>
             {part}
           </Text>
         );

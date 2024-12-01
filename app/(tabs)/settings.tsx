@@ -17,10 +17,12 @@ const SettingsScreen = () => {
         <Text className={`text-xl ${isDarkMode && "text-slate-50"}`}>
           {isDarkMode ? 'Dark Mode' : 'Light Mode'}
         </Text>
-        <Switch
+        <View className='h-fit w-fit rounded-3xl px-3 bg-gray-300 justify-center items-center'>
+          <Switch
           value={isDarkMode}
           onValueChange={toggleTheme} // Tema değiştirme fonksiyonu
         />
+        </View>
     </View>
   </SafeAreaView>
   );

@@ -23,7 +23,7 @@ const SearchScreen = () => {
   return (
     <SafeAreaView className={`w-full h-full ${isDarkMode ? "bg-black": undefined}`}>
     <View className="flex-1 items-center ">
-      <View className='flex-row w-11/12 justify-center items-center p-2 rounded-2xl border-solid border-gray-400 border-2 ' >
+      <View className='flex-row w-11/12 h-fit min-h-3 justify-center items-center p-2 rounded-2xl border-solid border-gray-400 border-2 ' >
         {checkedChars.length > 0 &&        
         <FlatList
         className='h-full rounded-xl  max-w-fit'

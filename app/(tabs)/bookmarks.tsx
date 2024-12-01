@@ -24,7 +24,8 @@ const BookMarksScreen = () => {
       <View className='flex-row w-full justify-around items-center '>        
         <Text className={`${isDarkMode ? "text-slate-200" : undefined } text-2xl m-4`}>Bookmarks Screen</Text>        
       </View>
-      {bookmarks.length > 0 ?
+      {bookmarks.length > 0 
+      ?
         <FlatList        
           className='mt-2 w-11/12 rounded-t-2xl border-solid border-gray-400 border-2 border-b-0'
           data={bookmarks}          
@@ -32,7 +33,12 @@ const BookMarksScreen = () => {
           renderItem={({ item }) => (
             <CharactersCard item={item} search={false} word={""} bookmarked={true}/>
           )}
-       />: <View className='w-full h-full justify-center items-center'><Text className='text-lg'>Any bookmark has been added yet</Text></View>
+       />
+       : 
+       <View
+        className='w-full h-full justify-center items-center'>
+          <Text className={`${isDarkMode ? "text-slate-200" : undefined } text-lg`}>Any bookmark has been added yet</Text>
+        </View>
       }      
     </View>
   </SafeAreaView>
