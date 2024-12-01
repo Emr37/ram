@@ -14,4 +14,4 @@ Bu sürede ilk defa kullanmaya başladığım paketler/kütüphaneler etkili old
 
 ## Projemin APK linkini buraya bırakıyorum
 
-- [https://expo.dev/artifacts/eas/cGsSnacXrfuhgCtj3fQimo.apk](https://expo.dev/artifacts/eas/cGsSnacXrfuhgCtj3fQimo.apk)
+- [https://expo.dev/artifacts/eas/drnA45uaVaAKMAdgJ17zKm.apk](https://expo.dev/artifacts/eas/drnA45uaVaAKMAdgJ17zKm.apk)
